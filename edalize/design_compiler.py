@@ -120,7 +120,6 @@ class Design_compiler(Edatool):
             # 'SDC'                 : 'read_xdc -unmanaged',
             # 'mem'                 : 'read_mem',
         }
-        logger.info("BENOIT EDALIZE")
         _file_type = f.file_type.split('-')[0]
         if _file_type in file_types:
             return file_types[_file_type] + ' ' + f.name
