@@ -113,12 +113,14 @@ class Design_compiler(Edatool):
         file_types = {
             'verilogSource'       : 'analyze -format verilog -work work',
             'systemVerilogSource' : 'analyze -format sverilog -work work',
+            'vhdlSource'          : 'analyze -format vhdl -work work',
             # 'xci'                 : 'read_ip',
             # 'xdc'                 : 'read_xdc',
             # 'tclSource'           : 'source',
             # 'SDC'                 : 'read_xdc -unmanaged',
             # 'mem'                 : 'read_mem',
         }
+        logger.info("BENOIT EDALIZE")
         _file_type = f.file_type.split('-')[0]
         if _file_type in file_types:
             return file_types[_file_type] + ' ' + f.name
