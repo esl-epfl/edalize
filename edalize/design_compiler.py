@@ -122,10 +122,10 @@ class Design_compiler(Edatool):
         }
         _file_type = f.file_type.split('-')[0]
         if _file_type in file_types:
-            cmd = []
+            cmd = ""
             cmd += file_types[_file_type] + ' '
             for k, v in self.vlogdefine.items():
-                cmd += ["-define {}={} ".format(k, self._param_value_str(v))]
+                cmd += "-define {}={} ".format(k, self._param_value_str(v))
             cmd += '-work work ' + f.name
             return cmd
 
