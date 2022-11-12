@@ -124,9 +124,16 @@ class Design_compiler(Edatool):
         if _file_type in file_types:
             cmd = ""
             cmd += file_types[_file_type] + ' '
-            for k, v in self.vlogdefine.items():
-                cmd += "-define {}={} ".format(k, self._param_value_str(v))
-            cmd += '-work work ' + f.name
+            
+            cmd_define = ""
+            if self.vlogdefine.items() != {}:
+                cmd_define = "-define {"
+                for k, v in self.vlogdefine.items():
+                    cmd_define += " "
+                    cmd_define += "{}={}".format(k, self._param_value_str(v))
+                cmd_define += " }"
+
+            cmd += cmd_define + ' ' + '-work work ' + f.name
             return cmd
 
         if _file_type == 'user':
