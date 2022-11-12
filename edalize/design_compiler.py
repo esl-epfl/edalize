@@ -129,8 +129,12 @@ class Design_compiler(Edatool):
             if self.vlogdefine.items() != {}:
                 cmd_define = "-define {"
                 for k, v in self.vlogdefine.items():
-                    cmd_define += " "
-                    cmd_define += "{}={}".format(k, self._param_value_str(v))
+                    # SKip reddefinition of SYNTHESIS which is a reserved macro in IEEE Verilog synthesizable subset
+                    if k != 'SYNTHESIS':
+                        cmd_define += " {}={}".format(k, self._param_value_str(v))
+                    # cmd_define += "{}".format(k)
+                    # if type(v) == str:
+                    #     cmd_define += "='{}'".format(self._param_value_str(v))
                 cmd_define += " }"
 
             cmd += cmd_define + ' ' + '-work work ' + f.name
