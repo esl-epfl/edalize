@@ -111,9 +111,9 @@ class Design_compiler(Edatool):
 
     def src_file_filter(self, f):
         file_types = {
-            'verilogSource'       : 'analyze -format verilog -work work',
-            'systemVerilogSource' : 'analyze -format sverilog -work work',
-            'vhdlSource'          : 'analyze -format vhdl -work work',
+            'verilogSource'       : 'analyze -format verilog',
+            'systemVerilogSource' : 'analyze -format sverilog',
+            'vhdlSource'          : 'analyze -format vhdl',
             # 'xci'                 : 'read_ip',
             # 'xdc'                 : 'read_xdc',
             # 'tclSource'           : 'source',
@@ -122,7 +122,11 @@ class Design_compiler(Edatool):
         }
         _file_type = f.file_type.split('-')[0]
         if _file_type in file_types:
-            return file_types[_file_type] + ' ' + f.name
+            cmd = []
+            cmd += file_types[_file_type] + ' '
+            for k, v in self.vlogdefine.items():
+                cmd += ["-define {}={} ".format(k, self._param_value_str(v))]
+            cmd += '-work work ' + f.name
 
         if _file_type == 'user':
             return ''
