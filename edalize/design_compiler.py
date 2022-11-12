@@ -127,6 +127,7 @@ class Design_compiler(Edatool):
             for k, v in self.vlogdefine.items():
                 cmd += ["-define {}={} ".format(k, self._param_value_str(v))]
             cmd += '-work work ' + f.name
+            return cmd
 
         if _file_type == 'user':
             return ''
