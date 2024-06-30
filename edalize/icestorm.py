@@ -36,6 +36,11 @@ class Icestorm(Edatool):
                         "type": "String",
                         "desc": "fixme",
                     },
+                    {    
+                        "name": "sv2v_options",
+                        "type": "String",
+                        "desc": "Additional options for sv2v",
+                    },
                 ],
             }
             Edatool._extend_options(options, Yosys)
