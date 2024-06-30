@@ -54,10 +54,6 @@ class Sv2v(Edatool):
                         )
                         for key, value in self.vlogdefine.items()
                     ]
-        print("PARAMS")
-        print(self.vlogparam)
-        print("DEFINES")
-        print(self.vlogdefine)
         
         sv2v_options = self.tool_options.get("sv2v_options", []) 
 
