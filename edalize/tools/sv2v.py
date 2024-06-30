@@ -38,12 +38,31 @@ class Sv2v(Edatool):
             }
         )
 
-        sv2v_options = self.tool_options.get("sv2v_options", [])
+        sv2v_vlogparams = [
+                        "--define={}".format(
+                            key
+                        ) if value == 0 
+                        else
+                        "--define={}={}".format(
+                            key, self._param_value_str(value, str_quote_style='\\"')
+                        )
+                        for key,value in self.vlogparam.items()
+                    ] 
+        sv2v_vlogdefines = [
+                        "--define={}={}".format(
+                            key, self._param_value_str(value, str_quote_style='\\"')
+                        )
+                        for key, value in self.vlogdefine.items()
+                    ]
+        
+        sv2v_options = self.tool_options.get("sv2v_options", []) 
 
         commands = EdaCommands()
         commands.add(
             ["sv2v", "-w", output_file]
             + sv2v_options
+            + sv2v_vlogparams
+            + sv2v_vlogdefines
             + ["-I" + d for d in incdirs]
             + sv_files,
             [output_file],
